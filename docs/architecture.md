@@ -2,85 +2,98 @@
 
 ## 1. Overview
 
-tibbstaff.com is a cross-platform medical recruitment application that began as a Flutter mobile application and later moved toward a Progressive Web App (PWA).
+**tibbstaff.com** is a medical recruitment platform designed to connect healthcare professionals with institutions seeking to hire them.
 
-The application supports two primary user roles:
+The platform supports two primary user roles:
 
-- **Job Seeker:** A healthcare professional looking for employment opportunities.
-- **Hiring Institution:** An organization seeking healthcare professionals.
+- **Job Seeker:** Healthcare professionals who browse job opportunities, manage their profiles, and submit applications.
+- **Hiring Institution:** Organizations that publish job opportunities, review applicants, and manage recruitment activities.
 
-The application uses role-based navigation to present different dashboards, tabs, and workflows to each user type.
+The application uses role-based navigation to provide each user type with an interface and features relevant to their needs.
 
-## 2. Technology Overview
+## 2. Technology Stack
 
-| Component | Technology | Purpose |
-|---|---|---|
-| Application framework | Flutter | Cross-platform application development |
-| Programming language | Dart | Flutter application implementation |
-| Backend platform | Appwrite (self-hosted) | Backend services |
-| Containerization | Docker | Supporting self-hosted infrastructure |
-| Runtime and tooling | Node.js | Project tooling or supporting components; exact usage to be documented |
-| Additional web technologies | TypeScript, JavaScript | Roles to be confirmed for the relevant components |
-| Version control | Git and GitHub | Source control and collaboration |
-| Development workflow | GitHub Spec Kit | Specification-driven planning and implementation |
+| Technology | Purpose |
+|---|---|
+| Flutter | Original cross-platform mobile application |
+| Dart | Programming language used for the original Flutter application |
+| Appwrite (self-hosted) | Backend services |
+| Docker | Containerized infrastructure |
+| Git and GitHub | Version control and project collaboration |
+| GitHub Spec Kit | Specification-driven development workflow |
 
-## 3. Authentication and Onboarding Flow
+The project began as a Flutter mobile application and later evolved toward a Progressive Web App (PWA). The technologies listed above reflect the original application and the project's supporting infrastructure.
 
-The documented user journey follows these steps:
+## 3. Authentication and Onboarding
+
+The authentication and onboarding flow establishes the user's session, profile, and application role.
 
 1. The user opens the application.
-2. If the user is not authenticated, the application navigates to the sign-in screen.
-3. After successful authentication, the application checks the user's profile.
-4. If the profile is missing, the application creates one.
-5. If the profile has no assigned role, the user is directed to role selection.
-6. The user selects either Job Seeker (`باحث عن عمل`) or Hiring Institution (`مؤسسة توظيف`).
+2. If the user is not authenticated, the application directs them to the sign-in screen.
+3. After successful authentication, the application checks whether a user profile exists.
+4. If a profile does not exist, the application creates one.
+5. If the profile does not have an assigned role, the user is directed to role selection.
+6. The user selects one of two roles:
+   - **Job Seeker** (`باحث عن عمل`)
+   - **Hiring Institution** (`مؤسسة توظيف`)
 7. The selected role is saved through `ProfileService.updateRole(role)`.
-8. The application navigates to the post-login shell.
-9. The shell reads the assigned role and presents the corresponding navigation and user experience.
+8. The application opens the main interface and displays the navigation and features associated with the assigned role.
+
+This flow ensures that users complete the required onboarding steps before accessing their role-specific interface.
 
 ## 4. Role-Based Application Structure
 
-### Job Seeker
+The platform provides separate interfaces for job seekers and hiring institutions.
 
-The job seeker interface includes:
+### 4.1 Job Seeker
 
-- Dashboard
-- Jobs
-- Notifications
-- Messages
-- Profile
+The job seeker interface includes the following sections:
 
-The dashboard is rendered through `SeekerDashboardHomeTabView()` in `post_login_shell.dart`.
+- **Dashboard:** Provides an overview of relevant account activity.
+- **Jobs:** Allows users to browse and search for available opportunities.
+- **Notifications:** Provides access to application-related updates.
+- **Messages:** Provides access to conversations.
+- **Profile:** Allows users to manage their personal and professional information.
 
-### Hiring Institution
+Job seekers can explore opportunities, save jobs, submit applications, and manage their recruitment-related activities through the platform.
 
-The hiring institution interface includes its dashboard, job-posting workflow, messaging, and other role-specific sections.
+### 4.2 Hiring Institution
 
-The documented dashboard workflow includes profile completion, verification status, quick statistics, job and applicant review, candidate decisions, and initiating messaging.
+The hiring institution interface focuses on recruitment and applicant management.
 
-The exact tab structure should be kept consistent with the current implementation.
+Its documented workflows include:
 
-## 5. Application State and Profile Management
+- Managing the institution's profile.
+- Creating and managing job postings.
+- Reviewing applicants for published positions.
+- Viewing recruitment-related statistics.
+- Reviewing candidate applications and making hiring decisions.
+- Initiating conversations with applicants.
 
-The application uses profile information and the assigned user role to determine the appropriate post-login experience.
+The interface organizes these activities into a role-specific dashboard and navigation structure.
 
-The documented onboarding flow includes:
+## 5. Profile and Role Management
 
-- Authentication state checking.
-- Profile existence checking and creation.
-- Role selection when a role is missing.
-- Role persistence through `ProfileService.updateRole(role)`.
-- Role-specific navigation after onboarding.
+User profiles and assigned roles determine the application experience presented after authentication.
 
-## 6. Mobile-to-PWA Transition
+The onboarding process handles profile existence checks, profile creation when necessary, role selection, and role persistence.
 
-The project initially focused on a mobile application. The team later chose a PWA approach after encountering difficulties with Google Play publication.
+The role update operation is handled through `ProfileService.updateRole(role)`. Once a role has been assigned, the application uses it to determine the appropriate navigation structure and role-specific features.
 
-The decision aimed to:
+This approach separates the job seeker and hiring institution experiences while allowing both user types to access the same platform.
 
-- Reduce dependence on app-store distribution.
-- Make the platform accessible through a web browser across supported devices.
-- Simplify distribution and centrally deliver application updates.
-- Reduce the maintenance overhead associated with distributing a mobile application.
+## 6. Mobile-to-PWA Evolution
 
-A PWA can provide an app-like experience, but installation behavior and available features depend on the browser and device.
+The project initially began as a Flutter mobile application. The team later moved toward a Progressive Web App (PWA) approach after encountering challenges with Google Play publication.
+
+The transition aimed to improve accessibility and simplify distribution by allowing users to access the platform through a web browser, reducing dependence on app-store distribution and enabling centralized application updates.
+
+A PWA can provide an app-like experience across supported devices. Its installation options and available capabilities depend on the browser, device, and implementation.
+
+## 7. Development Approach
+
+The project uses Git and GitHub for version control and GitHub Spec Kit to support a specification-driven development workflow.
+
+This approach helps organize requirements and implementation tasks before development, providing a structured way to plan features and maintain consistency as the application evolves.
+
+The platform is developed iteratively, with attention to user workflows, role-specific functionality, and the overall application experience.
