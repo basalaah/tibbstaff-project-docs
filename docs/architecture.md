@@ -72,8 +72,6 @@ The documented onboarding flow includes:
 - Role persistence through `ProfileService.updateRole(role)`.
 - Role-specific navigation after onboarding.
 
-The detailed data model, access-control rules, and backend implementation should be documented separately if they can be shared safely.
-
 ## 6. Mobile-to-PWA Transition
 
 The project initially focused on a mobile application. The team later chose a PWA approach after encountering difficulties with Google Play publication.
@@ -86,10 +84,3 @@ The decision aimed to:
 - Reduce the maintenance overhead associated with distributing a mobile application.
 
 A PWA can provide an app-like experience, but installation behavior and available features depend on the browser and device.
-
-## 7. Implementation Notes
-
-This document describes the architecture based on the project's documented workflows. It does not expose private source code, credentials, deployment configuration, or sensitive infrastructure details.
-
-Detailed implementation information should be added only after verifying it against the current codebase.
-
